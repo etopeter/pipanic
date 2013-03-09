@@ -1,18 +1,33 @@
 pipanic.sh
 Description
 -----------
-PiPanic is a bash script for Raspberry Pi to work with LED status indicator light. Script checks if user is logged in. If user is logged LED will start blinking if user loggs out LED will stop blinking.
+piPanic is a bash script for Raspberry Pi intended to work with LED status indicator light. Script checks if user is logged in. If user is logged LED will start blinking if user loggs out LED will stop blinking.
 
 Requirements
 ------------
 wiringPi library (https://projects.drogon.net/raspberry-pi/wiringpi/download-and-install/)
 
-Copy pipanic.sh to /root/scripts/
+Raspberry Pi GPIO PIN setup
+2,2K resistor and light emiting LED
+
+      +-------------|"<|---------------+
+      |                                |
+2  4  6  8  10 12 14 16 18 20 22 24 26 |
+o  o  o  o  o  o  o  o  o  o  o  o  o  |
+o  o  o  o  o  o  o  o  o  o  o  o  o  |
+1  3  5  7  9  11 13 15 17 19 21 23 25 |
+         |                             |
+         +------~;/\/\220K/\/\;~-------+
+
+Installation
+------------
+Copy pipanic.sh to /root/scripts/ (or edit service file to change location)
 
 Script is provided with Arch Linux systemd service file copy it to /etc/systemd/system and init with 
-systemctl --reload daemons    - to reload systemctl
-systemctl enable pipanic      - to run script at system startup
-systemctl start pipanic       - to run script
+* systemctl --reload daemons    - to reload systemctl
+* systemctl enable pipanic      - to run script at system startup
+* systemctl start pipanic       - to run script
+
 
 
 Version 1.0 - Initial version.
