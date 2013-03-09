@@ -1,0 +1,10 @@
+[Unit]
+Description=PiPanic Shell script
+
+[Service]
+WorkingDirectory=/root/scripts/
+Type=simple
+ExecStart=/bin/bash pipanic.sh 
+
+[Install]
+WantedBy=multi-user.target
