@@ -1,7 +1,7 @@
 #piPanic
 Description
 -----------
-piPanic is a bash script for Raspberry Pi intended to work with LED status indicator light. Script checks if user is logged in. If user is logged LED will start blinking if user loggs out LED will stop blinking.
+piPanic is a bash script for Raspberry Pi intended to work with LED status indicator light. Script checks if user is logged in. If user is logged LED will start blinking if user loggs out LED will stop blinking. Reset button can be pressed and hold after 1 second command will execute. In this example command will try to logout user by finding tty process and killing it.
 
 Requirements
 ------------
@@ -10,14 +10,14 @@ wiringPi library (https://projects.drogon.net/raspberry-pi/wiringpi/download-and
 Raspberry Pi GPIO PIN setup
 2,2K resistor and light emiting LED
 
-	      +---------------~|"<|~-----------+
-	      |                                |
-	2  4  6  8  10 12 14 16 18 20 22 24 26 |
-	o  o  o  o  o  o  o  o  o  o  o  o  o  |
-	o  o  o  o  o  o  o  o  o  o  o  o  o  |
-	1  3  5  7  9  11 13 15 17 19 21 23 25 |
-	         |                             |
-	         +----------~[ 220K ]~---------+
+	+--+     +---------------~|"<|~-----------+
+	|  |     |                                |
+	|  2  4  6  8  10 12 14 16 18 20 22 24 26 |
+	|  o  o  o  o  o  o  o  o  o  o  o  o  o  |
+	|  o  o  o  o  o  o  o  o  o  o  o  o  o  |
+	|  1  3  5  7  9  11 13 15 17 19 21 23 25 |
+	|     |     |                             |
+	+-/ --+     +----------~[ 220K ]~---------+
 
 Installation
 ------------
