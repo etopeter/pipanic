@@ -15,12 +15,17 @@
 
 # Settings
 # ----------------------------------------------------------
+# GPIO pin number connected to LED
+GPIO_PIN_LED=7						
 
-GPIO_PIN_LED=7						# GPIO pin number connected to LED
-GPIO_PIN_BUTTON=8 					# GPIO pin number connected to button
-LED_CMD="$(eval who | grep pi | awk '{ print $1 }' )" 	# Command to execute to test if LED should be blinkinga
-LED_CMD_RESULT="pi" 					# Result of command
-PANIC_CMD="ps -fp $(pgrep -d, -u pi) | awk '{ print $2 }' | sed -n '2p' | xargs kill -9"
+# GPIO pin number connected to button
+GPIO_PIN_BUTTON=8 					
+
+# LED checking command
+CMD_LEDCHECK="who | cut -d' ' -f1 | sort | uniq | grep pi"
+
+# LED checking command RESULT
+CMD_LEDCHECK_RESULT="pi"
 # ----------------------------------------------------------
 
 TIMER=0
@@ -45,16 +50,17 @@ do
 					BTN_STATUS=2
 					gpio write $GPIO_PIN_LED 1
 					LED_STATUS=1
-					$(eval $PANIC_CMD )
+					# Execute Panic command
+					$(eval ps -fp $(pgrep -d, -u pi) | sed -n '2p' | awk '{print $2}' | xargs kill -9)
 				fi
 			fi	
 		else
 			BTN_STATUS=0
 		fi
 
-		# Check for LED status
-		LED_CMD_EXEC=$LED_CMD;
-		if [ "${LED_CMD_EXEC:-1}" = "$LED_CMD_RESULT" ] ; then
+		# Check for LED status command
+		LED_CMD_EXEC=$(eval $CMD_LEDCHECK)
+		if [ "${LED_CMD_EXEC:-1}" = "$CMD_LEDCHECK_RESULT" ] ; then
 			if [ $STATUS -eq 0 ] ; then
 				STATUS=1
 			fi	
